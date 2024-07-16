@@ -63,7 +63,7 @@ namespace DemoApp
             connectionStringBuilder.UserID = username;
             connectionStringBuilder.Password = password;
             connectionStringBuilder.IntegratedSecurity = false;
-            connectionStringBuilder.DataSource = "db-external-svc";
+            connectionStringBuilder.DataSource = "k3s-sql-external-svc";
             connectionStringBuilder.InitialCatalog = "master";
             connectionStringBuilder.Encrypt = false; //Demo hack.  Don't do this at home kids!
 
@@ -90,7 +90,7 @@ namespace DemoApp
             //This is a workaround for the issue that is described here: https://github.com/dotnet/efcore/issues/15644
             //Normally the EnsureCreated method would create the database if it does not exist.
             //In the case of Arc SQL MI and Azure SQL PaaS and maybe other flavors of SQL, the error 18456 is thrown
-            //because SQL rejects the login attempt because the database that is in the connection string doesn’t exist yet.
+            //because SQL rejects the login attempt because the database that is in the connection string doesnï¿½t exist yet.
             //If you use 'master' as the InitialCatalog in the connection string and rely on EnsureCreated then the schema will be created in the master D.
             //It may be resolved in the future in response to this issue: https://github.com/dotnet/efcore/issues/27917
 
@@ -103,6 +103,7 @@ namespace DemoApp
             }
             catch (System.Exception ex)
             {
+                _logger.LogDebug(ex, "An error occurred while opening the connection or executing the command.");
                 _logger.LogInformation(ex.Message);
             }
 
