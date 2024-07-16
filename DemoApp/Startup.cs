@@ -63,7 +63,7 @@ namespace DemoApp
             connectionStringBuilder.UserID = username;
             connectionStringBuilder.Password = password;
             connectionStringBuilder.IntegratedSecurity = false;
-            connectionStringBuilder.DataSource = "k3s-sql-external-svc";
+            connectionStringBuilder.DataSource = "k3s-sql-external-svc,11433";
             connectionStringBuilder.InitialCatalog = "master";
             connectionStringBuilder.Encrypt = false; //Demo hack.  Don't do this at home kids!
 
